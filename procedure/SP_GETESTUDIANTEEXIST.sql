@@ -1,0 +1,30 @@
+DROP PROCEDURE GARVIZU.SP_GETESTUDIANTEEXIST;
+
+CREATE OR REPLACE PROCEDURE GARVIZU."SP_GETESTUDIANTEEXIST"
+(
+    CI VARCHAR2,
+    NOMBRE VARCHAR2,
+    APELLIDO VARCHAR2,
+    FECHA DATE,    
+    PERCURSORESTEXIST OUT SYS_REFCURSOR
+)
+AS
+    TOTAL_CI number;
+    TOTAL_NOMBRE number;
+    TOTAL_APELLIDO number;
+    TOTAL_FECHA number;
+    PERMITIDO NUMBER;
+BEGIN
+    open PERCURSORESTEXIST for   
+    select count(*) into TOTAL_CI from ESTUDIANTE e where e.CI = CI;
+    select count(*) into TOTAL_NOMBRE from ESTUDIANTE e where UPPER(e.NOMBRES) = UPPER(NOMBRE);
+    select count(*) into TOTAL_APELLIDO from ESTUDIANTE e where UPPER(e.APELLIDOS) = UPPER(APELLIDO);
+    select count(*) into TOTAL_FECHA from ESTUDIANTE e where trunc(E.fecha_nacimiento) = TO_DATE(FECHA,'dd/mm/yyyy HH24:MI:SS');
+    
+    IF(TOTAL_CI = 0 AND TOTAL_NOMBRE =0 AND TOTAL_APELLIDO=0 AND TOTAL_FECHA=0) THEN
+        PERMITIDO := 0;
+    ELSE
+        PERMITIDO := 1 ;
+    END IF;    
+ End;
+/

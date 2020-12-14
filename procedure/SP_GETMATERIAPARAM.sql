@@ -1,0 +1,17 @@
+DROP PROCEDURE GARVIZU.SP_GETMATERIAPARAM;
+
+CREATE OR REPLACE PROCEDURE GARVIZU."SP_GETMATERIAPARAM"
+(
+    
+    MAT VARCHAR2,
+    PERCURSORMATPARAM OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    open PERCURSORMATPARAM for
+    select ID_MATERIA, SIGLA, NOMBRE
+    from MATERIA 
+    where upper(NOMBRE) like '%' || upper(MAT) ||'%'
+    OR upper(SIGLA) like '%' || upper(MAT) ||'%';
+ End;
+/
