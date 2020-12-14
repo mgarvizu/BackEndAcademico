@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\EstudianteController.cs" />
+    <Compile Remove="Controllers\MateriaController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackEnd.Core\BackEnd.Core.csproj" />
+    <ProjectReference Include="..\BackEnd.Infraestructura\BackEnd.Infraestructura.csproj" />
+  </ItemGroup>
+
+
+</Project>
